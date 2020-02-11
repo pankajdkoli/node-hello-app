@@ -10,5 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pankajdkoli/node-hello-app.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/pankajdkoli/node-hello-app/issues"
+  },
+  "homepage": "https://github.com/pankajdkoli/node-hello-app#readme"
 }
