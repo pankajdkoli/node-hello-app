@@ -34,6 +34,22 @@ router.post('/', async (req, res) => {
     res.send(genre);
 });
 
+
+router.put('/:id', (req, res)=>{
+    const{ error } = validateGenres(req.body);
+    if (error) return res.status(400).send(error.details[0].messege);   
+    // res.status(400).send(error.details[0].messege);
+   // const g = Genre.findByIdAndUpdate({_id: req.params.id}, {name: req.body.name});
+
+    const genre = Genre.findByIdAndUpdate({_id: req.params.id}, {name: req.body.name});
+
+    genre.then(r => {
+        return res.status(200).send('The genre with the given ID has been updated');
+    }).catch(err => {
+        return res.status(404).send(err);
+    })
+});
+
 function validateGenres(genre){
     const schema = Joi.object({
         name: Joi.string().min(5).required().max(50)
