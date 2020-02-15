@@ -26,6 +26,7 @@ router.post('/', async (req, res) => {
         return res.status(400).send(error.details[0].message)
     }
      // const { error } = validateGenres(req.body);
+    
     // if (error) return res.status(400)(error.details[0].messege); 
    
     let genre = new Genre({name: req.body.name});
@@ -33,7 +34,6 @@ router.post('/', async (req, res) => {
 
     res.send(genre);
 });
-
 
 router.put('/:id', (req, res)=>{
     const{ error } = validateGenres(req.body);
@@ -50,6 +50,18 @@ router.put('/:id', (req, res)=>{
     })
 });
 
+router.delete('/:id',async(req, res) =>{
+    const genre = await Genre.findByIdAndRemove(req.params.id);
+    
+    if (!genre) return res.status(404).send('The genre with the given ID');
+    
+    res.send(genre);
+}) ;
+router.get('/:id', async(req, res)=> {
+    const genre = await Genre.findById(req.params.id);
+    if (!genre) return res.status(404).send('The genre with the given Id');
+    res.send(genre);
+});
 function validateGenres(genre){
     const schema = Joi.object({
         name: Joi.string().min(5).required().max(50)
